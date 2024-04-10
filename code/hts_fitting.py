@@ -12,6 +12,7 @@ from scipy import integrate, constants
 from scipy.optimize import curve_fit
 import ipywidgets as widgets
 
+plt.rcParams['axes.titlesize'] = 20
 plt.rcParams['axes.labelsize'] = 20
 plt.rcParams['xtick.labelsize'] = 14
 plt.rcParams['ytick.labelsize'] = 14
@@ -80,7 +81,7 @@ def aggregateIVs(fpaths):
         current, voltage = np.append(current, i), np.append(voltage, v)
     return current, voltage
 
-def showcaseIVs(fpaths):
+def showcaseIVs(fpaths, style='loglog'):
     fig, ax = plt.subplots(figsize=(9, 4))
     
     def on_spinbox_value_change(change, ax):
@@ -89,16 +90,25 @@ def showcaseIVs(fpaths):
             f = fpaths[spinbox.value]
             ax.set_title(f.split('/')[-1])
             i, v, temperature = readIV(f)
-            ic, n, current, voltage, chisq, pcov = fitIcMeasurement(f, function='linear')
-            ax.semilogy(i, 1e6*v, color='lightgray', marker='+', label='raw data')
-            ax.semilogy(current, 1e6*voltage, color='k', marker='+', label='corrected voltage')
-            xsmooth = np.linspace(np.min(current), np.max(current), 10000)
-            cut = voltage > .2e-6
-            ax.semilogy(current[cut], 1e6*voltage[cut], color='b', marker='+')
-            ax.semilogy(xsmooth, 1e6*powerLaw(xsmooth, ic, n), linewidth=3, alpha=.2, color='b', label='powerLaw fit')
+            if style == 'loglog':
+                ic, n, current, voltage, chisq, pcov = fitIcMeasurement(f, function='linear')
+                ax.semilogy(i, 1e6*v, color='lightgray', marker='+', label='raw data')
+                ax.semilogy(current, 1e6*voltage, color='k', marker='+', label='corrected voltage')
+                xsmooth = np.linspace(np.min(current), np.max(current), 10000)
+                cut = voltage > .2e-6
+                ax.semilogy(current[cut], 1e6*voltage[cut], color='b', marker='+')
+                ax.semilogy(xsmooth, 1e6*powerLaw(xsmooth, ic, n), linewidth=3, alpha=.2, color='b', label='powerLaw fit')
+                ax.set_ylim(1e-2, 1e2)
+            else:
+                ic, n, current, voltage, chisq, pcov = fitIcMeasurement(f, function='powerLaw')
+                ax.plot(i, 1e6*v, color='lightgray', marker='+', label='raw data')
+                ax.plot(current, 1e6*voltage, color='k', marker='+', label='corrected voltage')
+                xsmooth = np.linspace(np.min(current), np.max(current), 10000)
+                ax.plot(current, 1e6*voltage, color='b', marker='+')
+                ax.plot(xsmooth, 1e6*powerLaw(xsmooth, ic, n), linewidth=3, alpha=.2, color='b', label='powerLaw fit')
+                ax.set_ylim(-.5, 3)
             ax.axhline(0.2)
             ax.legend()
-            ax.set_ylim(1e-2, 1e2)
         except Exception as e:
             print(e)
     spinbox = widgets.IntText(description="IV#:", min=0, max=len(fpaths), value=1)
