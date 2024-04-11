@@ -1,0 +1,117 @@
+====== pysrim run =======
+        SRIM-2013.00
+=======================================
+      Data  of  TRIM  Calculation      
+=======================================
+--------------------------------------------------------------------
+    Recoil/Damage Calculations made with Kinchin-Pease Estimates    
+--------------------------------------------------------------------
+Ion =  O ( 8)   Ion Mass= 015.9994
+Energy  = 8000000.E-03 keV
+Ion Angle to Surface = 0 degrees
+============= TARGET MATERIAL ======================================
+  Layer # 1 - None
+  Layer # 1 - Bottom Depth=     2.E+04 A
+  Layer # 1- Density = 5.846E22 atoms/cm3 = 10.47 g/cm3
+  Layer # 1- Ag = 100  Atomic Percent = 100  Mass Percent
+====================================================================
+  Layer # 2 - None
+  Layer # 2 - Bottom Depth=     4.E+04 A
+  Layer # 2- Density = 7.403E22 atoms/cm3 = 6.3 g/cm3
+  Layer # 2-  Y = 7.69 Atomic Percent = 13.3 Mass Percent
+  Layer # 2- Ba = 15.3 Atomic Percent = 41.2 Mass Percent
+  Layer # 2- Cu = 23.0 Atomic Percent = 28.6 Mass Percent
+  Layer # 2-  O = 53.8 Atomic Percent = 16.8 Mass Percent
+====================================================================
+  Layer # 3 - None
+  Layer # 3 - Bottom Depth=     4.E+04 A
+  Layer # 3- Density = 8.142E22 atoms/cm3 = 6.54 g/cm3
+  Layer # 3- La = 20   Atomic Percent = 57.4 Mass Percent
+  Layer # 3- Mn = 20   Atomic Percent = 22.7 Mass Percent
+  Layer # 3-  O = 60   Atomic Percent = 19.8 Mass Percent
+====================================================================
+  Layer # 4 - None
+  Layer # 4 - Bottom Depth=     4.E+04 A
+  Layer # 4- Density = 10.69E22 atoms/cm3 = 3.58 g/cm3
+  Layer # 4- Mg = 50   Atomic Percent = 60.3 Mass Percent
+  Layer # 4-  O = 50   Atomic Percent = 39.6 Mass Percent
+====================================================================
+  Layer # 5 - None
+  Layer # 5 - Bottom Depth=     4.E+04 A
+  Layer # 5- Density = 6.680E22 atoms/cm3 = 5.01 g/cm3
+  Layer # 5-  Y = 40   Atomic Percent = 78.7 Mass Percent
+  Layer # 5-  O = 60   Atomic Percent = 21.2 Mass Percent
+====================================================================
+  Layer # 6 - None
+  Layer # 6 - Bottom Depth=     4.E+04 A
+  Layer # 6- Density = 11.66E22 atoms/cm3 = 3.95 g/cm3
+  Layer # 6- Al = 40   Atomic Percent = 52.9 Mass Percent
+  Layer # 6-  O = 60   Atomic Percent = 47.0 Mass Percent
+====================================================================
+  Layer # 7 - None
+  Layer # 7 - Bottom Depth=     1.E+05 A
+  Layer # 7- Density = 7.709E22 atoms/cm3 = 8.89 g/cm3
+  Layer # 7- Ni = 55.2 Atomic Percent = 46.7 Mass Percent
+  Layer # 7- Mo = 17.0 Atomic Percent = 23.6 Mass Percent
+  Layer # 7- Cr = 16.0 Atomic Percent = 12.0 Mass Percent
+  Layer # 7- Fe = 7.03 Atomic Percent = 5.65 Mass Percent
+  Layer # 7-  W = 4.52 Atomic Percent = 11.9 Mass Percent
+====================================================================
+Target energies for target atom = Ag
+    Displacement = 39 eV, Binding = 39 eV, Surface = 3 eV
+Target energies for target atom =  Y
+    Displacement = 38.969166666666666 eV, Binding = 38.969166666666666 eV, Surface = 3 eV
+Target energies for target atom = Ba
+    Displacement = 40.98166666666666 eV, Binding = 40.98166666666666 eV, Surface = 3 eV
+Target energies for target atom = Cu
+    Displacement = 17.2275 eV, Binding = 17.2275 eV, Surface = 3 eV
+Target energies for target atom =  O
+    Displacement = 19.212124999999997 eV, Binding = 19.212124999999997 eV, Surface = 3 eV
+Target energies for target atom = La
+    Displacement = 29 eV, Binding = 29 eV, Surface = 3 eV
+Target energies for target atom = Mn
+    Displacement = 33 eV, Binding = 33 eV, Surface = 3 eV
+Target energies for target atom =  O
+    Displacement = 19.212124999999997 eV, Binding = 19.212124999999997 eV, Surface = 3 eV
+Target energies for target atom = Mg
+    Displacement = 20 eV, Binding = 20 eV, Surface = 3 eV
+Target energies for target atom =  O
+    Displacement = 19.212124999999997 eV, Binding = 19.212124999999997 eV, Surface = 3 eV
+Target energies for target atom =  Y
+    Displacement = 38.969166666666666 eV, Binding = 38.969166666666666 eV, Surface = 3 eV
+Target energies for target atom =  O
+    Displacement = 19.212124999999997 eV, Binding = 19.212124999999997 eV, Surface = 3 eV
+Target energies for target atom = Al
+    Displacement = 27 eV, Binding = 27 eV, Surface = 3 eV
+Target energies for target atom =  O
+    Displacement = 19.212124999999997 eV, Binding = 19.212124999999997 eV, Surface = 3 eV
+Target energies for target atom = Ni
+    Displacement = 33 eV, Binding = 33 eV, Surface = 3 eV
+Target energies for target atom = Mo
+    Displacement = 65 eV, Binding = 65 eV, Surface = 3 eV
+Target energies for target atom = Cr
+    Displacement = 40 eV, Binding = 40 eV, Surface = 3 eV
+Target energies for target atom = Fe
+    Displacement = 40 eV, Binding = 40 eV, Surface = 3 eV
+Target energies for target atom =  W
+    Displacement = 90 eV, Binding = 90 eV, Surface = 3 eV
+====================================================================
+Depth Range of Tabulated Data=  000000.E+00  -  121500.E+00  Angstroms
+====================================================================
+Total Ions calculated =  020000
+Average Range         =   28818.E+00 Angstroms
+Average Straggling    =   26454.E-01 Angstroms
+Average Vacancy/Ion   =   17188.E-01
+====================================================================
+Total Backscattered Ions=  4 
+Total Transmitted Ions  =  0 
+====================================================================
+See files SRIM Outputs\*.txt for tables :
+   TDATA.txt    -- Details of the calculation.
+   RANGE.txt    -- Final distribution of Ions/Recoils
+   VACANCY.txt  -- Distribution of Vacancies
+   IONIZ.txt    -- Distribution of Ionization
+   PHONON.txt   -- Distribution of Phonons
+   E2RECOIL.txt -- Energy transferred to recoils
+   NOVAC.txt    -- Replacement collisions
+   LATERAL.txt  -- Lateral Spread of Ions

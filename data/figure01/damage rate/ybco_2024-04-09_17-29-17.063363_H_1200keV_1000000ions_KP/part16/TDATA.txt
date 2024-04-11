@@ -1,0 +1,48 @@
+====== pysrim run =======
+        SRIM-2013.00
+=======================================
+      Data  of  TRIM  Calculation      
+=======================================
+--------------------------------------------------------------------
+    Recoil/Damage Calculations made with Kinchin-Pease Estimates    
+--------------------------------------------------------------------
+Ion =  H ( 1)   Ion Mass= 001.0079
+Energy  = 1200000.E-03 keV
+Ion Angle to Surface = 0 degrees
+============= TARGET MATERIAL ======================================
+  Layer # 1 - None
+  Layer # 1 - Bottom Depth=     1.E+05 A
+  Layer # 1- Density = 7.403E22 atoms/cm3 = 6.3 g/cm3
+  Layer # 1-  Y = 7.69 Atomic Percent = 13.3 Mass Percent
+  Layer # 1- Ba = 15.3 Atomic Percent = 41.2 Mass Percent
+  Layer # 1- Cu = 23.0 Atomic Percent = 28.6 Mass Percent
+  Layer # 1-  O = 53.8 Atomic Percent = 16.8 Mass Percent
+====================================================================
+Target energies for target atom =  Y
+    Displacement = 38.969166666666666 eV, Binding = 38.969166666666666 eV, Surface = 3 eV
+Target energies for target atom = Ba
+    Displacement = 40.98166666666666 eV, Binding = 40.98166666666666 eV, Surface = 3 eV
+Target energies for target atom = Cu
+    Displacement = 17.2275 eV, Binding = 17.2275 eV, Surface = 3 eV
+Target energies for target atom =  O
+    Displacement = 19.212124999999997 eV, Binding = 19.212124999999997 eV, Surface = 3 eV
+====================================================================
+Depth Range of Tabulated Data=  000000.E+00  -  140000.E+00  Angstroms
+====================================================================
+Total Ions calculated =  050000
+Average Range         =   11949.E+01 Angstroms
+Average Straggling    =   57598.E-01 Angstroms
+Average Vacancy/Ion   =   19553.E-03
+====================================================================
+Total Backscattered Ions=  12 
+Total Transmitted Ions  =  0 
+====================================================================
+See files SRIM Outputs\*.txt for tables :
+   TDATA.txt    -- Details of the calculation.
+   RANGE.txt    -- Final distribution of Ions/Recoils
+   VACANCY.txt  -- Distribution of Vacancies
+   IONIZ.txt    -- Distribution of Ionization
+   PHONON.txt   -- Distribution of Phonons
+   E2RECOIL.txt -- Energy transferred to recoils
+   NOVAC.txt    -- Replacement collisions
+   LATERAL.txt  -- Lateral Spread of Ions
