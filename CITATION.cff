@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Devitre"
+  given-names: "Alexis R."
+  orcid: "https://orcid.org/0000-0001-7428-0373"
+title: "Supplementary material for CryoHTS-Facility paper"
+version: 2.0.4
+doi: 10.5281/zenodo.10957594
+date-released: 2024-04-10
+url: "https://github.com/shortlab/2024-CryoHTS-Facility"
