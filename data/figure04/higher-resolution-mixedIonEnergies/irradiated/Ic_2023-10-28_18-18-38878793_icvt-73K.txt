@@ -1,3 +1,0 @@
-# Ic =  nan A, n =  nan , Tavg = 73.36 K, icvt-73K
-#datetime                        t_s     iHTS_A                vHTS_V                tHTS_K  tTAR_K
-0202-10-28_18:18:38.457000      671.79        1.41984300e-02        3.36349834e-05  73.3554  72.5686

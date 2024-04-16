@@ -1,8 +1,12 @@
 '''
-    A library to load, plot and fit Critical Current (Ic) and Critical Temperature (Tc) of REBCO coated conductors.
+    A library to load, plot and fit Critical Current (Ic) and Critical Temperature (Tc) of REBCO coated conductors, 
+    as required by the Jupyter Notebook that generate the figures of the RSI Paper titled: A facility for cryogenic ion 
+    irradiation and in operando characterization of Rare-Earth Barium Copper Oxide superconducting tapes by A.R Devitre, D.X. 
+    Fischer, K.B. Woller, B.C. Clark, M.P. Short, D.G. Whyte, and Z.S. Hartwig.
+    
     @author Alexis Devitre (devitre@mit.edu)
+    @update 2024/04/15
 '''
-import hts_misc
 import numpy as np
 import matplotlib.pyplot as plt
 import platform
@@ -81,41 +85,6 @@ def aggregateIVs(fpaths):
         current, voltage = np.append(current, i), np.append(voltage, v)
     return current, voltage
 
-def showcaseIVs(fpaths, style='loglog'):
-    fig, ax = plt.subplots(figsize=(9, 4))
-    
-    def on_spinbox_value_change(change, ax):
-        try:
-            ax.clear()
-            f = fpaths[spinbox.value]
-            ax.set_title(f.split('/')[-1])
-            i, v, temperature = readIV(f)
-            if style == 'loglog':
-                ic, n, current, voltage, chisq, pcov = fitIcMeasurement(f, function='linear')
-                ax.semilogy(i, 1e6*v, color='lightgray', marker='+', label='raw data')
-                ax.semilogy(current, 1e6*voltage, color='k', marker='+', label='corrected voltage')
-                xsmooth = np.linspace(np.min(current), np.max(current), 10000)
-                cut = voltage > .2e-6
-                ax.semilogy(current[cut], 1e6*voltage[cut], color='b', marker='+')
-                ax.semilogy(xsmooth, 1e6*powerLaw(xsmooth, ic, n), linewidth=3, alpha=.2, color='b', label='powerLaw fit')
-                ax.set_ylim(1e-2, 1e2)
-            else:
-                ic, n, current, voltage, chisq, pcov = fitIcMeasurement(f, function='powerLaw')
-                ax.plot(i, 1e6*v, color='lightgray', marker='+', label='raw data')
-                ax.plot(current, 1e6*voltage, color='k', marker='+', label='corrected voltage')
-                xsmooth = np.linspace(np.min(current), np.max(current), 10000)
-                ax.plot(current, 1e6*voltage, color='b', marker='+')
-                ax.plot(xsmooth, 1e6*powerLaw(xsmooth, ic, n), linewidth=3, alpha=.2, color='b', label='powerLaw fit')
-                ax.set_ylim(-.5, 3)
-            ax.axhline(0.2)
-            ax.legend()
-        except Exception as e:
-            print(e)
-    spinbox = widgets.IntText(description="IV#:", min=0, max=len(fpaths), value=1)
-    spinbox.observe(lambda change: on_spinbox_value_change(change, ax), names='value')
-    display(spinbox)
-    spinbox.value = 0
-    
     
 def readTV(fname, fformat='mit', vb=False):
     time, voltage, sampleT, targetT = np.genfromtxt(fname, usecols=[1, 3, 4, 5], unpack=True)
@@ -126,26 +95,6 @@ def readTV(fname, fformat='mit', vb=False):
 
     return time, voltage, sampleT, targetT
 
-
-def showcaseTVs(fpaths):
-    fig, ax = plt.subplots(figsize=(9, 4))
-    def on_spinbox_value_change(change, ax):
-        try:
-            ax.clear()
-            f = fpaths[spinbox.value]
-            ax.set_title(f.split('/')[-1])
-            time, voltage, sampleT, targetT = readTV(f)
-            ax.plot(sampleT, 1e6*voltage, color='k', marker='+', label='raw data')
-            ax.axhline(0.2)
-            ax.legend()
-            ax.set_xlim(60, 90)
-            ax.set_ylim(-1, 5)
-        except Exception as e:
-            print(e)
-    spinbox = widgets.IntText(description="TV#:", min=0, max=len(fpaths), value=1)
-    spinbox.observe(lambda change: on_spinbox_value_change(change, ax), names='value')
-    display(spinbox)
-    spinbox.value = 0
 
 ########################################################################################
 ########################################################################################
@@ -161,10 +110,6 @@ def linear(i, a, b):
 
 def powerLaw(i, ic, n):
     return 2e-7*(i/ic)**n
-
-def inverseExponential(temperature, a, b, c, t50):
-    #return a*temperature*(1-1/(np.exp(b*(temperature-t50))+1))
-    return a*temperature-c/(np.exp(b*(temperature-t50))+1)
 
 def plotFit(x, function, popt, fig=None, alpha=.5, linewidth=5, **kwargs):
     if fig is None:
@@ -324,130 +269,3 @@ def correctBackground(current, voltage, vc=.2e-6, ic=30, n=30, vThreshold=1e-7, 
         counter += 1
         if vb: print('Remove background cycle {}/5\n\n'.format(counter))
     return voltage
-
-'''
-def removeBackground(current, voltage, ic, n, noiseThreshold, vc):
-    #print(ic, noiseThreshold, vc, n)
-    iThreshold = ic*(noiseThreshold/vc)**(1./n)
-    
-    cut = (current < iThreshold)
-    ccut, vcut = current[cut], voltage[cut]
-    if (len(vcut) > 10):
-        popt, pcov = curve_fit(linear, ccut, vcut)
-    else:
-        popt, pcov = curve_fit(linear, current, voltage)
-    
-    background = linear(current, *popt)
-    return voltage - background
-'''
-
-def fitTc(temperature, voltage, time, bounds=(80, 90), ax=None, label='', filter_strength=(1.2*1e6, 11)):
-    # slice the temperature range
-    cut = (bounds[0] <= temperature) & (temperature <= bounds[1])
-    temp = temperature
-    temperature, voltage, time = np.sort(temperature)[cut], 1e6*np.array([x for _, x in sorted(zip(temp, voltage))])[cut], np.array([x for _, x in sorted(zip(temp, time))])[cut]
-    
-    # weed-out the large fluctuations
-    dV = np.abs(np.append(0, np.diff(voltage)))
-    cut = dV < filter_strength[0]
-    temperature, voltage, time = temperature[cut], savgol_filter(voltage[cut], filter_strength[1], 2), time[cut]
-    dV = np.abs(np.append(0, np.diff(voltage)))
-    
-    if ax is not None:
-        rampRate = 60*np.append(0, np.diff(temperature)/np.diff(time))
-        ax[0].plot(temperature, voltage, linestyle='-', marker='+', color='k')
-        ax[1].plot(temperature, dV/np.max(dV), linestyle='-', marker='+', color='purple')
-        ax[2].plot(temperature, rampRate, color='k', label='{:4.2f} K/min'.format(np.mean(rampRate)))
-        ax[0].set_ylim(-1, np.max(voltage))
-        ax[1].set_ylim(0, 1)
-        
-    # find t50
-    cut = 0.5 <= dV/np.max(dV)
-    temperature, voltage, dV = temperature[cut], voltage[cut], dV[cut]
-    t50 = temperature[np.argmax(dV)]
-    
-    xsmooth = np.linspace(bounds[0], bounds[1], 100000)
-    popt_rise, _ = curve_fit(linear, temperature, voltage)
-    ysmooth_rise = linear(xsmooth, *popt_rise)
-
-    tore = -popt_rise[1]/popt_rise[0]
-    
-    if ax is not None:
-        ax[0].plot(temperature, voltage, linestyle='-', marker='+', color='orange', label=label)
-        ax[1].plot(temperature, dV/np.max(dV), linestyle='-', marker='+', color='orange')
-        ax[1].axhline(.5, color='orange', linestyle='--')
-        ax[0].axvline(tore, label='Tore = {:4.2f} K'.format(tore), color='green')
-        
-        ax[0].plot(xsmooth, ysmooth_rise, linewidth=3, alpha=.4, color='orange')
-        ax[1].set_xlim(bounds[0], bounds[1])
-        ax[0].legend(loc='upper left')
-        ax[2].legend(loc='upper right')
-        
-    return t50, tore
-
-
-def fitTV(temperature, voltage):
-    '''
-        fitTV fits the TV data to a 3-parameter inverse exponential
-        
-        INPUTS
-        ----------------------------------------------------------
-        temperature (float, list) - measured temperatures
-        voltage (float, list) - Measured voltages (must be same length as temperature)
-        
-        RETURNS
-        ----------------------------------------------------------
-        tc_lossless (float) - value of the temperature below which cooper pairs form
-        tc_superconducting (float) - value of the temperature below which the current is carried without resistance
-    '''
-    try:
-        # initial estimates
-        a0 = voltage[-1]/temperature[-1]                                # Ohm's law crosses zero!
-        b0 = 2.                                                         # Inverse of the transition width in the Fermi function
-        T0 = temperature[np.argmin(np.abs(voltage-np.max(voltage))/2)]  # T50 is more or less at half the maximum voltage
-        
-        # use inverse exponential fit to determine T50
-        popt, pcov = curve_fit(inverseExponential, temperature, voltage, p0=[a0, b0, T0])
-        xsmooth = np.linspace(np.min(temperature), np.max(temperature))
-        ysmooth = inverseExponential(xsmooth, *popt)
-        
-        # use linear fits to determine Tosc and Tore
-        derivative = np.diff(ysmooth)/np.diff(xsmooth)
-        
-        slope_bottom = 0.
-        inter_bottom = 0.
-        
-        slope_rise = np.max(derivative)
-        inter_rise = ysmooth[np.argmax(derivative)]-slope_rise*xsmooth[np.argmax(derivative)]
-        
-        slope_top = popt[0] # Slope of the upper shelf in the Fermi function
-        inter_top = 0.      # Ohm's law crosses zero
-        
-        Tore = -inter_rise/slope_rise
-        T50  = popt[2]
-        Tosc = inter_rise/(slope_top-slope_rise)
-    
-    except Exception as e:
-        print('fittingFunctions::fitTV returned: ', e)
-        Tore, T50, Tosc, popt = np.nan, np.nan, np.nan, [np.nan, np.nan, np.nan]
-        
-    return Tore, T50, Tosc, popt
-
-
-########################################################################################
-########################################################################################
-######################## PLOTTING SPECIFIC DATASETS ####################################
-########################################################################################
-########################################################################################
-
-def plotIcT(fpaths):
-    fig, ax = plt.subplots()
-    
-    ics, temperatures = [], []
-    for fpath in fpaths:
-        current, voltage, temperature = readIV(fpath, fformat='mit', logIV=False, vc=2e-7, maxV=20e-6, iMin=0, vb=False)
-        popt, pcov, chisq = fitIV(current, voltage)
-        ics.append(popt[0])
-        temperatures.append(np.mean(temperature[:-10]))
-        
-    ax.plot(temperatures, ics)
