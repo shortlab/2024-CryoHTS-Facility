@@ -4,7 +4,7 @@ authors:
 - family-names: "Devitre"
   given-names: "Alexis R."
   orcid: "https://orcid.org/0000-0001-7428-0373"
-title: "Supplementary material for CryoHTS-Facility paper"
+title: "GitHub Repository contianing all data and analysis routines for this "
 version: 2.0.4
 doi: 10.5281/zenodo.10957594
 date-released: 2024-04-10
