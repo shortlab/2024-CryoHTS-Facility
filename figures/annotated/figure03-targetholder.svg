@@ -215,9 +215,9 @@
      inkscape:window-width="1856"
      inkscape:window-height="945"
      inkscape:window-x="21"
-     inkscape:window-y="36"
+     inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="g3" /><g
+     inkscape:current-layer="g1" /><g
      inkscape:groupmode="layer"
      inkscape:label="Image"
      id="g1"><image
@@ -237,33 +237,33 @@
        transform="translate(-56.080762,332.87112)"><tspan
          x="932.07697"
          y="462.73322"
-         id="tspan21"><tspan
+         id="tspan5"><tspan
    style="font-size:21.3333px"
-   id="tspan7">Cold-head and heaters</tspan>
+   id="tspan3">Cold-head and heaters</tspan>
 </tspan><tspan
          x="932.07697"
          y="486.97891"
-         id="tspan27"><tspan
+         id="tspan8"><tspan
            style="font-size:16px"
-           id="tspan22">* Base temperature: 15 K
+           id="tspan6">* Base temperature: 15 K
 </tspan></tspan><tspan
          x="932.07697"
          y="510.31229"
-         id="tspan29"><tspan
+         id="tspan10"><tspan
            style="font-size:16px"
-           id="tspan28">* Cooling power: 25W at 20 K
+           id="tspan9">* Cooling power: 25W at 20 K
 </tspan></tspan><tspan
          x="932.07697"
          y="533.64569"
-         id="tspan32"><tspan
+         id="tspan18"><tspan
            style="font-size:16px"
-           id="tspan31">* Heating power: 440 W
+           id="tspan16">* Heating power: 400 W
 </tspan></tspan><tspan
          x="932.07697"
          y="556.97907"
-         id="tspan34"><tspan
+         id="tspan20"><tspan
            style="font-size:16px"
-           id="tspan33">* CX-CH: PID temperature sensor </tspan></tspan></text><text
+           id="tspan19">* CX-CH: PID temperature sensor </tspan></tspan></text><text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"
        x="876.5163"
